@@ -9,6 +9,10 @@ import json
 from datetime import datetime
 import os
 
+from flask import Flask, request
+from flasgger import Swagger, LazyString, LazyJSONEncoder
+from flasgger import swag_from
+
 
 app = Flask(__name__)
 api = Api(app)
@@ -136,6 +140,13 @@ class InvalidSeason(Exception):
         self.invalid_source_message = f"""
             '{self.input_season}' is an invalid season. Please enter a valid number."""
         super().__init__(self.invalid_source_message)
+
+
+@app.route('/', methods=['GET'])
+def home():
+    #TODO Use Python to load swagger doc to the home page!
+    return 'Hello there!'
+
 
 
 @app.route('/playerstats/<int:season>,<int:round_number>,<string:source>', methods=['GET'])
