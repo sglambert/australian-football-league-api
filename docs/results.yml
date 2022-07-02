@@ -1,0 +1,186 @@
+parameters:
+  - name: season
+    in: query
+    type: integer
+    description: The season number in year format YYYY
+    default: 2022
+    required: false
+  - name: round_number
+    in: query
+    type: integer
+    description: The round number
+    default: 1
+    required: false
+  - name: source
+    in: query
+    type: string
+    enum: ['footywire', 'fryzigg', 'afltables', 'AFL']
+    description: The data source. Note, only 'AFL' source has AFLW fixture data.
+    default: AFL
+    required: false
+  - name: competition
+    in: query
+    type: string
+    enum: ['AFLM', 'AFLW']
+    description: The AFL competition.
+    default: AFLM
+    required: false
+definitions:
+  Results:
+    type: object
+    properties:
+      match.date:
+        type: object
+      match.status:
+        type: object
+      match.matchId:
+        type: object
+      match.venue:
+        type: object
+      match.utcStartTime:
+        type: object
+      match.homeTeamId:
+        type: object
+      match.awayTeamId:
+        type: object
+      match.round:
+        type: object
+      match.venueLocalStartTime:
+        type: object
+      match.abbr:
+        type: object
+      match.twitterHashTag:
+        type: object
+      match.homeTeam.name:
+        type: object
+      match.homeTeam.timeZone:
+        type: object
+      match.homeTeam.teamId:
+        type: object
+      match.homeTeam.abbr:
+        type: object
+      match.homeTeam.nickname:
+        type: object
+      match.awayTeam.name:
+        type: object
+      match.awayTeam.timeZone:
+        type: object
+      match.awayTeam.teamId:
+        type: object
+      match.awayTeam.abbr:
+        type: object
+      match.awayTeam.nickname:
+        type: object
+      venue.address:
+        type: object
+      venue.name:
+        type: object
+      venue.state:
+        type: object
+      venue.timeZone:
+        type: object
+      venue.venueId:
+        type: object
+      venue.abbreviation:
+        type: object
+      venue.capacity:
+        type: object
+      venue.groundDimension:
+        type: object
+      venue.latitude:
+        type: object
+      venue.longitude:
+        type: object
+      venue.landOwner:
+        type: object
+      round.name:
+        type: object
+      round.year:
+        type: object
+      round.roundId:
+        type: object
+      round.abbreviation:
+        type: object
+      round.competitionId:
+        type: object
+      round.roundNumber:
+        type: object
+      status:
+        type: object
+      matchId:
+        type: object
+      scoreWorm:
+        type: object
+      scoreMap:
+        type: object
+      lastUpdated:
+        type: object
+      homeTeamScore.periodScore:
+        type: object
+      homeTeamScore.rushedBehinds:
+        type: object
+      homeTeamScore.minutesInFront:
+        type: object
+      homeTeamScore.matchScore.totalScore:
+        type: object
+      homeTeamScore.matchScore.goals:
+        type: object
+      homeTeamScore.matchScore.behinds:
+        type: object
+      homeTeamScore.matchScore.superGoals:
+        type: object
+      awayTeamScore.periodScore:
+        type: object
+      awayTeamScore.rushedBehinds:
+        type: object
+      awayTeamScore.minutesInFront:
+        type: object
+      awayTeamScore.matchScore.totalScore:
+        type: object
+      awayTeamScore.matchScore.goals:
+        type: object
+      awayTeamScore.matchScore.behinds:
+        type: object
+      awayTeamScore.matchScore.superGoals:
+        type: object
+      matchClock.periods:
+        type: object
+      weather.description:
+        type: object
+      weather.tempInCelsius:
+        type: object
+      weather.weatherType:
+        type: object
+      homeTeamScoreChart.goals:
+        type: object
+      homeTeamScoreChart.leftBehinds:
+        type: object
+      homeTeamScoreChart.rightBehinds:
+        type: object
+      homeTeamScoreChart.leftPosters:
+        type: object
+      homeTeamScoreChart.rightPosters:
+        type: object
+      homeTeamScoreChart.rushedBehinds:
+        type: object
+      homeTeamScoreChart.touchedBehinds:
+        type: object
+      awayTeamScoreChart.goals:
+        type: object
+      awayTeamScoreChart.leftBehinds:
+        type: object
+      awayTeamScoreChart.rightBehinds:
+        type: object
+      awayTeamScoreChart.leftPosters:
+        type: object
+      awayTeamScoreChart.rightPosters:
+        type: object
+      awayTeamScoreChart.rushedBehinds:
+        type: object
+      awayTeamScoreChart.touchedBehinds:
+        type: object
+responses:
+  200:
+    description: JSON response with results.
+    schema:
+      $ref: '#/definitions/Results'

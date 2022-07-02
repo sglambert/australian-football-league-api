@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template, request, __version__
 from flask_restful import Api
 from rpy2.rinterface_lib.sexp import NACharacterType
 import rpy2.robjects.packages as packages
@@ -8,10 +8,20 @@ import numpy as np
 import json
 from datetime import datetime
 import os
+from flasgger import Swagger
+from flasgger import swag_from
 
 
 app = Flask(__name__)
 api = Api(app)
+swagger = Swagger(app)
+
+
+@app.route('/')
+def index():
+    return render_template('flasgger.html',
+                           examples={'hello': 'there'},
+                           version=__version__)
 
 
 class MyEncoder(json.JSONEncoder):
@@ -138,14 +148,15 @@ class InvalidSeason(Exception):
         super().__init__(self.invalid_source_message)
 
 
-@app.route('/playerstats/<int:season>,<int:round_number>,<string:source>', methods=['GET'])
-def player_stats(**kwargs):
+@app.route('/player_statistics', methods=['GET'])
+@swag_from('docs/player_statistics.yml')
+def player_stats():
 
     r_package = packages.importr('fitzRoy')
 
-    season = kwargs.get('season', datetime.now().year)
-    round_number = kwargs.get('round_number', '')
-    source = kwargs.get('source', 'AFL')
+    season = request.args.get('season', default=datetime.now().year, type=int)
+    round_number = request.args.get('round_number', default='')
+    source = request.args.get('source', default='AFL', type=str)
 
     # season input validation
     if not isinstance(season, int):
@@ -176,15 +187,16 @@ def player_stats(**kwargs):
     return player_stats
 
 
-@app.route('/fixture/<int:season>,<int:round_number>,<string:competition>', methods=['GET'])
-def fixture(**kwargs):
+@app.route('/fixture', methods=['GET'])
+@swag_from('docs/fixture.yml')
+def fixture():
 
     r_package = packages.importr('fitzRoy')
 
-    season = kwargs.get('season', datetime.now().year)
-    round_number = kwargs.get('round_number', '')
-    source = kwargs.get('source', 'AFL')
-    competition = kwargs.get('competition', 'AFLM')
+    season = request.args.get('season', default=datetime.now().year, type=int)
+    round_number = request.args.get('round_number', default=1)
+    source = request.args.get('source', default='AFL', type=str)
+    competition = request.args.get('competition', default='AFLM', type=str)
 
     # round_number input validation
     if source != 'AFL' and round_number == '':
@@ -211,14 +223,15 @@ def fixture(**kwargs):
     return fixture
 
 
-@app.route('/lineup/<int:season>,<int:round_number>,<string:competition>', methods=['GET'])
-def lineup(**kwargs):
+@app.route('/lineup', methods=['GET'])
+@swag_from('docs/lineup.yml')
+def lineup():
 
     r_package = packages.importr('fitzRoy')
 
-    season = kwargs.get('season', datetime.now().year)
-    round_number = kwargs.get('round_number', 1)
-    competition = kwargs.get('competition', 'AFLM')
+    season = request.args.get('season', default=datetime.now().year, type=int)
+    round_number = request.args.get('round_number', default=1, type=int)
+    competition = request.args.get('competition', default='AFLM', type=str)
 
     response = r_package.fetch_lineup(season=season, round_number=round_number, comp=competition)
 
@@ -233,15 +246,16 @@ def lineup(**kwargs):
     return lineup
 
 
-@app.route('/results/<int:season>,<int:round_number>,<string:competition>', methods=['GET'])
-def results(**kwargs):
+@app.route('/results', methods=['GET'])
+@swag_from('docs/results.yml')
+def results():
 
     r_package = RPackageDependencies('fitzRoy')
 
-    round_number = kwargs.get('round_number', 1)
-    season = kwargs.get('season', datetime.now().year if round_number else datetime.now().year - 1)
-    source = kwargs.get('source', 'AFL')
-    competition = kwargs.get('competition', 'AFLM')
+    round_number = request.args.get('round_number', default=1, type=int)
+    season = request.args.get('season', default=datetime.now().year, type=int)
+    source = request.args.get('source', default='AFL', type=str)
+    competition = request.args.get('competition', default='AFLM', type=str)
 
     if not isinstance(season, int):
         try:
@@ -273,15 +287,16 @@ def results(**kwargs):
     return results
 
 
-@app.route('/ladder/<int:season>,<string:source>', methods=['GET'])
-def ladder(**kwargs):
+@app.route('/ladder', methods=['GET'])
+@swag_from('docs/ladder.yml')
+def ladder():
 
     r_package = packages.importr('fitzRoy')
 
-    season = kwargs.get('season', datetime.now().year)
-    round_number = kwargs.get('round_number', 1)
-    source = kwargs.get('source', 'AFL')
-    competition = kwargs.get('competition', 'AFLM')
+    season = request.args.get('season', default=datetime.now().year, type=int)
+    round_number = request.args.get('round_number', default=1, type=int)
+    source = request.args.get('source', default='AFL', type=str)
+    competition = request.args.get('competition', default='AFLM', type=str)
 
     # competition input validation
     valid_competitions = ('AFLM', 'AFLW')
@@ -322,14 +337,15 @@ def ladder(**kwargs):
     return ladder
 
 
-@app.route('/player_details/<string:team>,<string:current>,<string:source>', methods=['GET'])
-def player_details(**kwargs):
+@app.route('/player_details', methods=['GET'])
+@swag_from('docs/player_details.yml')
+def player_details():
 
     r_package = packages.importr('fitzRoy')
 
-    source = kwargs.get('source', 'AFL')
-    current = kwargs.get('current', True)
-    team = kwargs.get('team', '')
+    source = request.args.get('source', default='AFL', type=str)
+    current = request.args.get('current', default=True, type=bool)
+    team = request.args.get('team', default='', type=str)
 
     response = r_package.fetch_player_details(team=team, current=current, source=source)
 
