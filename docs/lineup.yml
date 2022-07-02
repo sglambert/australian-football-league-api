@@ -1,0 +1,75 @@
+parameters:
+  - name: season
+    in: query
+    type: integer
+    description: The season number in year format YYYY
+    default: 2022
+    required: false
+  - name: round_number
+    in: query
+    type: integer
+    description: The round number. Note, by passing in an empty string for round_number with 'AFL' as the source all of the season's fixture will be returned.
+    default: 1
+    required: false
+  - name: source
+    in: query
+    type: string
+    enum: ['footywire', 'AFL', 'squiggle']
+    description: The data source. Note, only the 'AFL' source will return 'AFLW' fixture data.
+    default: AFL
+    required: false
+  - name: competition
+    in: query
+    type: string
+    enum: ['AFLM', 'AFLW']
+    description: The AFL competition.
+    required: false
+definitions:
+  Lineup:
+    type: object
+    properties:
+      providerId:
+        type: object
+      utcStartTime:
+        type: object
+      status:
+        type: object
+      compSeason.shortName:
+        type: object
+      round.name:
+        type: object
+      round.roundNumber:
+        type: object
+      venue.name:
+        type: object
+      teamAbbr:
+        type: object
+      teamName:
+        type: object
+      teamNickname:
+        type: object
+      teamId:
+        type: object
+      position:
+        type: object
+      player.playerId:
+        type: object
+      player.captain:
+        type: object
+      player.playerJumperNumber:
+        type: object
+      player.playerName.givenName:
+        type: object
+      player.playerName.surname:
+        type: object
+      teamStatus:
+        type: object
+      teamType:
+        type: object
+      lateChanges:
+        type: object
+responses:
+  200:
+    description: JSON response with lineup.
+    schema:
+      $ref: '#/definitions/Lineup'
