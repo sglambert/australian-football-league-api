@@ -1,27 +1,18 @@
-from flask import Flask, render_template, request, __version__
+
+import json
+import os
+from datetime import datetime
+
+import numpy as np
+import pandas as pd
+import rpy2.robjects.packages as packages
+from flask import Flask, render_template, request
 from flask_restful import Api
 from rpy2.rinterface_lib.sexp import NACharacterType
-import rpy2.robjects.packages as packages
 from rpy2.robjects.vectors import DataFrame as rdf
-import pandas as pd
-import numpy as np
-import json
-from datetime import datetime
-import os
-from flasgger import Swagger
-from flasgger import swag_from
-
 
 app = Flask(__name__)
 api = Api(app)
-swagger = Swagger(app)
-
-
-@app.route('/')
-def index():
-    return render_template('flasgger.html',
-                           examples={'hello': 'there'},
-                           version=__version__)
 
 
 class MyEncoder(json.JSONEncoder):
@@ -148,47 +139,19 @@ class InvalidSeason(Exception):
         super().__init__(self.invalid_source_message)
 
 
-@app.route('/player_statistics', methods=['GET'])
-@swag_from('docs/player_statistics.yml')
-def player_stats():
+@app.route('/')
+def get_root():
+    print('sending root')
+    return render_template('index.html')
 
-    r_package = packages.importr('fitzRoy')
 
-    season = request.args.get('season', default=datetime.now().year, type=int)
-    round_number = request.args.get('round_number', default='')
-    source = request.args.get('source', default='AFL', type=str)
-
-    # season input validation
-    if not isinstance(season, int):
-        try:
-            season = int(season)
-        except:
-            raise InvalidSeason(season)
-
-    # source input validation
-    valid_sources = ('AFL', 'footywire', 'fryzigg', 'afltables')
-    if source not in valid_sources:
-        raise InvalidSource(source, valid_sources)
-
-    if source.upper() not in ('AFL', 'AFLM') and round_number:
-        print('''round_number is currently only supported with the 'AFL' source.
-                 Returning data for all rounds in specified season.''')
-
-    response = r_package.fetch_player_stats(season=season, source=source, round_number=round_number)
-
-    player_stats = pd.DataFrame.from_dict({key: np.asarray(response.rx2(key)) for key in response.names}, orient='index')
-
-    player_stats = player_stats.T
-
-    player_stats = player_stats.to_dict()
-
-    player_stats = json.dumps(player_stats, cls=MyEncoder)
-
-    return player_stats
+@app.route('/api/docs')
+def get_api_docs():
+    print('sending docs')
+    return render_template('swaggerui.html')
 
 
 @app.route('/fixture', methods=['GET'])
-@swag_from('docs/fixture.yml')
 def fixture():
 
     r_package = packages.importr('fitzRoy')
@@ -223,72 +186,7 @@ def fixture():
     return fixture
 
 
-@app.route('/lineup', methods=['GET'])
-@swag_from('docs/lineup.yml')
-def lineup():
-
-    r_package = packages.importr('fitzRoy')
-
-    season = request.args.get('season', default=datetime.now().year, type=int)
-    round_number = request.args.get('round_number', default=1, type=int)
-    competition = request.args.get('competition', default='AFLM', type=str)
-
-    response = r_package.fetch_lineup(season=season, round_number=round_number, comp=competition)
-
-    lineup = pd.DataFrame.from_dict({key: np.asarray(response.rx2(key)) for key in response.names}, orient='index')
-
-    lineup = lineup.T
-
-    lineup = lineup.to_dict()
-
-    lineup = json.dumps(lineup, cls=MyEncoder)
-
-    return lineup
-
-
-@app.route('/results', methods=['GET'])
-@swag_from('docs/results.yml')
-def results():
-
-    r_package = RPackageDependencies('fitzRoy')
-
-    round_number = request.args.get('round_number', default=1, type=int)
-    season = request.args.get('season', default=datetime.now().year, type=int)
-    source = request.args.get('source', default='AFL', type=str)
-    competition = request.args.get('competition', default='AFLM', type=str)
-
-    if not isinstance(season, int):
-        try:
-            season = int(season)
-        except:
-            raise InvalidSeason(season)
-
-    if not isinstance(round_number, int):
-        try:
-            round_number = int(round_number)
-        except:
-            raise InvalidRoundNumber(round_number)
-
-    # source input validation
-    valid_sources = ('footywire', 'fryzigg', 'afltables', 'AFL')
-    if source not in valid_sources:
-        raise InvalidSource(source, valid_sources)
-
-    response = r_package.source_package.fetch_results(season=season, round_number=round_number, comp=competition)
-
-    results = pd.DataFrame.from_dict({key: np.asarray(response.rx2(key)) for key in response.names}, orient='index')
-
-    results = results.T
-
-    results = results.to_dict()
-
-    results = json.dumps(results, cls=MyEncoder)
-
-    return results
-
-
 @app.route('/ladder', methods=['GET'])
-@swag_from('docs/ladder.yml')
 def ladder():
 
     r_package = packages.importr('fitzRoy')
@@ -337,8 +235,29 @@ def ladder():
     return ladder
 
 
+@app.route('/lineup', methods=['GET'])
+def lineup():
+
+    r_package = packages.importr('fitzRoy')
+
+    season = request.args.get('season', default=datetime.now().year, type=int)
+    round_number = request.args.get('round_number', default=1, type=int)
+    competition = request.args.get('competition', default='AFLM', type=str)
+
+    response = r_package.fetch_lineup(season=season, round_number=round_number, comp=competition)
+
+    lineup = pd.DataFrame.from_dict({key: np.asarray(response.rx2(key)) for key in response.names}, orient='index')
+
+    lineup = lineup.T
+
+    lineup = lineup.to_dict()
+
+    lineup = json.dumps(lineup, cls=MyEncoder)
+
+    return lineup
+
+
 @app.route('/player_details', methods=['GET'])
-@swag_from('docs/player_details.yml')
 def player_details():
 
     r_package = packages.importr('fitzRoy')
@@ -358,6 +277,84 @@ def player_details():
     player_details = json.dumps(player_details, cls=MyEncoder)
 
     return player_details
+
+
+@app.route('/player_statistics', methods=['GET'])
+def player_stats():
+
+    r_package = packages.importr('fitzRoy')
+
+    season = request.args.get('season', default=datetime.now().year, type=int)
+    round_number = request.args.get('round_number', default='')
+    source = request.args.get('source', default='AFL', type=str)
+
+    # season input validation
+    if not isinstance(season, int):
+        try:
+            season = int(season)
+        except:
+            raise InvalidSeason(season)
+
+    # source input validation
+    valid_sources = ('AFL', 'footywire', 'fryzigg', 'afltables')
+    if source not in valid_sources:
+        raise InvalidSource(source, valid_sources)
+
+    if source.upper() not in ('AFL', 'AFLM') and round_number:
+        print('''round_number is currently only supported with the 'AFL' source.
+                 Returning data for all rounds in specified season.''')
+
+    response = r_package.fetch_player_stats(season=season, source=source, round_number=round_number)
+
+    player_stats = pd.DataFrame.from_dict({key: np.asarray(response.rx2(key)) for key in response.names}, orient='index')
+
+    player_stats = player_stats.T
+
+    player_stats = player_stats.to_dict()
+
+    player_stats = json.dumps(player_stats, cls=MyEncoder)
+
+    return player_stats
+
+
+@app.route('/results', methods=['GET'])
+def results():
+
+    r_package = RPackageDependencies('fitzRoy')
+
+    round_number = request.args.get('round_number', default=1, type=int)
+    season = request.args.get('season', default=datetime.now().year, type=int)
+    source = request.args.get('source', default='AFL', type=str)
+    competition = request.args.get('competition', default='AFLM', type=str)
+
+    if not isinstance(season, int):
+        try:
+            season = int(season)
+        except:
+            raise InvalidSeason(season)
+
+    if not isinstance(round_number, int):
+        try:
+            round_number = int(round_number)
+        except:
+            raise InvalidRoundNumber(round_number)
+
+    # source input validation
+    valid_sources = ('footywire', 'fryzigg', 'afltables', 'AFL')
+    if source not in valid_sources:
+        raise InvalidSource(source, valid_sources)
+
+    response = r_package.source_package.fetch_results(season=season, round_number=round_number, comp=competition)
+
+    results = pd.DataFrame.from_dict({key: np.asarray(response.rx2(key)) for key in response.names}, orient='index')
+
+    results = results.T
+
+    results = results.to_dict()
+
+    results = json.dumps(results, cls=MyEncoder)
+
+    return results
 
 
 if __name__ == '__main__':
