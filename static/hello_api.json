@@ -1,0 +1,1767 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Australian Football League (AFL) API",
+    "description": "An API to get AFL data from multiple data sources."
+  },
+  "paths": {
+    "/fixture": {
+      "get": {
+        "tags": [
+          "Fixture"
+        ],
+        "description": "Returns results",
+        "parameters": [
+          {
+            "name": "season",
+            "in": "query",
+            "type": "integer",
+            "description": "The season number in year format YYYY",
+            "default": 2022,
+            "required": false
+          },
+          {
+            "name": "round_number",
+            "in": "query",
+            "type": "integer",
+            "description": "The round number",
+            "default": 1,
+            "required": false
+          },
+          {
+            "name": "source",
+            "in": "query",
+            "type": "string",
+            "description": "The data source. Note, only 'AFL' source has AFLW fixture data.",
+            "default": "AFL",
+            "required": false
+          },
+          {
+            "name": "competition",
+            "in": "query",
+            "type": "string",
+            "description": "The AFL competition.",
+            "default": "AFLM",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "object",
+                      "description": "id"
+                    },
+                    "providerId": {
+                      "type": "object",
+                      "description": "providerId"
+                    },
+                    "status": {
+                      "type": "object",
+                      "description": "status"
+                    },
+                    "compSeason.id": {
+                      "type": "object",
+                      "description": "compSeason.id"
+                    },
+                    "compSeason.providerId": {
+                      "type": "object",
+                      "description": "compSeason.providerId"
+                    },
+                    "compSeason.name": {
+                      "type": "object",
+                      "description": "compSeason.name"
+                    },
+                    "compSeason.shortName": {
+                      "type": "object",
+                      "description": "compSeason.shortName"
+                    },
+                    "CompSeason.currentRoundNumber": {
+                      "type": "object",
+                      "description": "CompSeason.currentRoundNumber"
+                    },
+                    "round.id": {
+                      "type": "object",
+                      "description": "round.id"
+                    },
+                    "round.providerId": {
+                      "type": "object",
+                      "description": "round.providerId"
+                    },
+                    "round.abbreviation": {
+                      "type": "object",
+                      "description": "round.abbreviation"
+                    },
+                    "round.name": {
+                      "type": "object",
+                      "description": "round.name"
+                    },
+                    "round.roundNumber": {
+                      "type": "object",
+                      "description": "round.roundNumber"
+                    },
+                    "round.byes": {
+                      "type": "object",
+                      "description": "round.byes"
+                    },
+                    "home.team.id": {
+                      "type": "object",
+                      "description": "home.team.id"
+                    },
+                    "home.team.providerId": {
+                      "type": "object",
+                      "description": "home.team.providerId"
+                    },
+                    "home.team.name": {
+                      "type": "object",
+                      "description": "home.team.name"
+                    },
+                    "home.team.abbreviation": {
+                      "type": "object",
+                      "description": "home.team.abbreviation"
+                    },
+                    "home.team.nickname": {
+                      "type": "object",
+                      "description": "home.team.nickname"
+                    },
+                    "home.team.teamType": {
+                      "type": "object",
+                      "description": "home.team.teamType"
+                    },
+                    "home.team.club.id": {
+                      "type": "object",
+                      "description": "home.team.club.id"
+                    },
+                    "home.team.club.providerId": {
+                      "type": "object",
+                      "description": "home.team.club.providerId"
+                    },
+                    "home.team.club.name": {
+                      "type": "object",
+                      "description": "home.team.club.name"
+                    },
+                    "home.team.club.abbreviation": {
+                      "type": "object",
+                      "description": "home.team.club.abbreviation"
+                    },
+                    "home.team.club.nickname": {
+                      "type": "object",
+                      "description": "home.team.club.nickname"
+                    },
+                    "home.score.goals": {
+                      "type": "object",
+                      "description": "home.score.goals"
+                    },
+                    "home.score.behinds": {
+                      "type": "object",
+                      "description": "home.score.behinds"
+                    },
+                    "home.score.totalScore": {
+                      "type": "object",
+                      "description": "home.score.totalScore"
+                    },
+                    "home.score.superGoals": {
+                      "type": "object",
+                      "description": "home.score.superGoals"
+                    },
+                    "away.team.id": {
+                      "type": "object",
+                      "description": "away.team.id"
+                    },
+                    "away.team.providerId": {
+                      "type": "object",
+                      "description": "away.team.providerId"
+                    },
+                    "away.team.name": {
+                      "type": "object",
+                      "description": "away.team.name"
+                    },
+                    "away.team.abbreviation": {
+                      "type": "object",
+                      "description": "away.team.abbreviation"
+                    },
+                    "away.team.nickname": {
+                      "type": "object",
+                      "description": "away.team.nickname"
+                    },
+                    "away.team.teamType": {
+                      "type": "object",
+                      "description": "away.team.teamType"
+                    },
+                    "away.team.club.id": {
+                      "type": "object",
+                      "description": "away.team.club.id"
+                    },
+                    "away.team.club.providerId": {
+                      "type": "object",
+                      "description": "away.team.club.providerId"
+                    },
+                    "away.team.club.name": {
+                      "type": "object",
+                      "description": "away.team.club.name"
+                    },
+                    "away.team.club.abbreviation": {
+                      "type": "object",
+                      "description": "away.team.club.abbreviation"
+                    },
+                    "away.team.club.nickname": {
+                      "type": "object",
+                      "description": "away.team.club.nickname"
+                    },
+                    "away.score.goals": {
+                      "type": "object",
+                      "description": "away.score.goals"
+                    },
+                    "away.score.behinds": {
+                      "type": "object",
+                      "description": "away.score.behinds"
+                    },
+                    "away.score.totalScore": {
+                      "type": "object",
+                      "description": "away.score.totalScore"
+                    },
+                    "away.score.superGoals": {
+                      "type": "object",
+                      "description": "away.score.superGoals"
+                    },
+                    "venue.id": {
+                      "type": "object",
+                      "description": "venue.id"
+                    },
+                    "venue.providerId": {
+                      "type": "object",
+                      "description": "venue.providerId"
+                    },
+                    "venue.name": {
+                      "type": "object",
+                      "description": "venue.name"
+                    },
+                    "venue.abbreviation": {
+                      "type": "object",
+                      "description": "venue.abbreviation"
+                    },
+                    "venue.location": {
+                      "type": "object",
+                      "description": "venue.location"
+                    },
+                    "venue.state": {
+                      "type": "object",
+                      "description": "venue.state"
+                    },
+                    "venue.timezone": {
+                      "type": "object",
+                      "description": "venue.timezone"
+                    },
+                    "metadata.ticket_link": {
+                      "type": "object",
+                      "description": "metadata.ticket_link"
+                    },
+                    "compSeason.year": {
+                      "type": "object",
+                      "description": "compSeason.year"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ladder": {
+      "get": {
+        "tags": [
+          "Ladder"
+        ],
+        "description": "Returns Ladder",
+        "parameters": [
+          {
+            "name": "season",
+            "in": "query",
+            "type": "integer",
+            "description": "The season number in year format YYYY",
+            "default": 2022,
+            "required": false
+          },
+          {
+            "name": "round_number",
+            "in": "query",
+            "type": "integer",
+            "description": "The round number",
+            "default": 1,
+            "required": false
+          },
+          {
+            "name": "source",
+            "in": "query",
+            "type": "string",
+            "description": "The data source. Note, only 'AFL' source has AFLW fixture data.",
+            "default": "AFL",
+            "required": false
+          },
+          {
+            "name": "competition",
+            "in": "query",
+            "type": "string",
+            "description": "The AFL competition.",
+            "default": "AFLM",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "season": {
+                      "type": "object",
+                      "description": "id"
+                    },
+                    "season_name": {
+                      "type": "object",
+                      "description": "providerId"
+                    },
+                    "round_name": {
+                      "type": "object",
+                      "description": "away.team.id"
+                    },
+                    "round_number": {
+                      "type": "object",
+                      "description": "away.team.providerId"
+                    },
+                    "last_updated": {
+                      "type": "object",
+                      "description": "away.team.name"
+                    },
+                    "conference": {
+                      "type": "object",
+                      "description": "away.team.abbreviation"
+                    },
+                    "position": {
+                      "type": "object",
+                      "description": "away.team.nickname"
+                    },
+                    "played": {
+                      "type": "object",
+                      "description": "away.team.teamType"
+                    },
+                    "pointsFor": {
+                      "type": "object",
+                      "description": "away.team.club.id"
+                    },
+                    "pointsAgainst": {
+                      "type": "object",
+                      "description": "away.team.club.providerId"
+                    },
+                    "minScore": {
+                      "type": "object",
+                      "description": "away.team.club.name"
+                    },
+                    "maxScore": {
+                      "type": "object",
+                      "description": "away.team.club.abbreviation"
+                    },
+                    "avgWinMargin": {
+                      "type": "object",
+                      "description": "away.team.club.nickname"
+                    },
+                    "avgLossMargin": {
+                      "type": "object",
+                      "description": "away.score.goals"
+                    },
+                    "away.score.behinds": {
+                      "type": "object",
+                      "description": "away.score.behinds"
+                    },
+                    "playersUsed": {
+                      "type": "object",
+                      "description": "away.score.totalScore"
+                    },
+                    "playedThisRound": {
+                      "type": "object",
+                      "description": "away.score.superGoals"
+                    },
+                    "form": {
+                      "type": "object",
+                      "description": "venue.id"
+                    },
+                    "positionChange": {
+                      "type": "object",
+                      "description": "venue.providerId"
+                    },
+                    "team.id": {
+                      "type": "object",
+                      "description": "venue.name"
+                    },
+                    "team.providerId": {
+                      "type": "object",
+                      "description": "venue.abbreviation"
+                    },
+                    "team.name": {
+                      "type": "object",
+                      "description": "venue.location"
+                    },
+                    "team.abbreviation": {
+                      "type": "object",
+                      "description": "venue.state"
+                    },
+                    "team.nickname": {
+                      "type": "object",
+                      "description": "venue.timezone"
+                    },
+                    "team.teamType": {
+                      "type": "object",
+                      "description": "metadata.ticket_link"
+                    },
+                    "team.club.id": {
+                      "type": "object",
+                      "description": "compSeason.year"
+                    },
+                    "team.club.providerId": {
+                      "type": "object",
+                      "description": "away.team.club.abbreviation"
+                    },
+                    "team.club.name": {
+                      "type": "object",
+                      "description": "away.team.club.nickname"
+                    },
+                    "team.club.abbreviation": {
+                      "type": "object",
+                      "description": "away.score.goals"
+                    },
+                    "team.club.nickname": {
+                      "type": "object",
+                      "description": "away.score.behinds"
+                    },
+                    "quartersWon.winQ1": {
+                      "type": "object",
+                      "description": "away.score.totalScore"
+                    },
+                    "quartersWon.winQ2": {
+                      "type": "object",
+                      "description": "away.score.superGoals"
+                    },
+                    "quartersWon.winQ3": {
+                      "type": "object",
+                      "description": "venue.id"
+                    },
+                    "quartersWon.winQ4": {
+                      "type": "object",
+                      "description": "venue.providerId"
+                    },
+                    "quartersWon.total": {
+                      "type": "object",
+                      "description": "venue.name"
+                    },
+                    "thisSeasonRecord.ladderPosition": {
+                      "type": "object",
+                      "description": "venue.abbreviation"
+                    },
+                    "thisSeasonRecord.aggregatePoints": {
+                      "type": "object",
+                      "description": "venue.location"
+                    },
+                    "thisSeasonRecord.percentage": {
+                      "type": "object",
+                      "description": "venue.state"
+                    },
+                    "thisSeasonRecord.winRatio": {
+                      "type": "object",
+                      "description": "venue.timezone"
+                    },
+                    "thisSeasonRecord.winLossRecord.wins": {
+                      "type": "object",
+                      "description": "metadata.ticket_link"
+                    },
+                    "thisSeasonRecord.winLossRecord.losses": {
+                      "type": "object",
+                      "description": "compSeason.year"
+                    },
+                    "thisSeasonRecord.winLossRecord.draws": {
+                      "type": "object",
+                      "description": "away.team.providerId"
+                    },
+                    "thisSeasonRecord.winLossRecord.played": {
+                      "type": "object",
+                      "description": "away.team.name"
+                    },
+                    "thisRoundLastSeason.ladderPosition": {
+                      "type": "object",
+                      "description": "away.team.abbreviation"
+                    },
+                    "thisRoundLastSeason.aggregatePoints": {
+                      "type": "object",
+                      "description": "away.team.nickname"
+                    },
+                    "thisRoundLastSeason.percentage": {
+                      "type": "object",
+                      "description": "away.team.teamType"
+                    },
+                    "thisRoundLastSeason.winRatio": {
+                      "type": "object",
+                      "description": "away.team.club.id"
+                    },
+                    "thisRoundLastSeason.winLossRecord.wins": {
+                      "type": "object",
+                      "description": "away.team.club.providerId"
+                    },
+                    "thisRoundLastSeason.winLossRecord.losses": {
+                      "type": "object",
+                      "description": "away.team.club.name"
+                    },
+                    "thisRoundLastSeason.winLossRecord.draws": {
+                      "type": "object",
+                      "description": "away.team.club.abbreviation"
+                    },
+                    "thisRoundLastSeason.winLossRecord.played": {
+                      "type": "object",
+                      "description": "away.team.club.nickname"
+                    },
+                    "homeRecord.wins": {
+                      "type": "object",
+                      "description": "away.score.goals"
+                    },
+                    "homeRecord.losses": {
+                      "type": "object",
+                      "description": "away.score.behinds"
+                    },
+                    "homeRecord.draws": {
+                      "type": "object",
+                      "description": "away.score.totalScore"
+                    },
+                    "homeRecord.played": {
+                      "type": "object",
+                      "description": "away.score.superGoals"
+                    },
+                    "lastFiveGamesRecord.wins": {
+                      "type": "object",
+                      "description": "venue.id"
+                    },
+                    "lastFiveGamesRecord.losses": {
+                      "type": "object",
+                      "description": "venue.providerId"
+                    },
+                    "lastFiveGamesRecord.draws": {
+                      "type": "object",
+                      "description": "venue.name"
+                    },
+                    "lastFiveGamesRecord.played": {
+                      "type": "object",
+                      "description": "venue.abbreviation"
+                    },
+                    "dayRecord.wins": {
+                      "type": "object",
+                      "description": "venue.location"
+                    },
+                    "dayRecord.losses": {
+                      "type": "object",
+                      "description": "venue.state"
+                    },
+                    "dayRecord.draws": {
+                      "type": "object",
+                      "description": "venue.timezone"
+                    },
+                    "dayRecord.played": {
+                      "type": "object",
+                      "description": "metadata.ticket_link"
+                    },
+                    "localRecord.wins": {
+                      "type": "object",
+                      "description": "compSeason.year"
+                    },
+                    "localRecord.losses": {
+                      "type": "object",
+                      "description": "away.team.club.abbreviation"
+                    },
+                    "localRecord.draws": {
+                      "type": "object",
+                      "description": "away.team.club.nickname"
+                    },
+                    "localRecord.played": {
+                      "type": "object",
+                      "description": "away.score.goals"
+                    },
+                    "lastOpponent.id": {
+                      "type": "object",
+                      "description": "away.score.behinds"
+                    },
+                    "lastOpponent.providerId": {
+                      "type": "object",
+                      "description": "away.score.totalScore"
+                    },
+                    "lastOpponent.name": {
+                      "type": "object",
+                      "description": "away.score.superGoals"
+                    },
+                    "lastOpponent.abbreviation": {
+                      "type": "object",
+                      "description": "venue.id"
+                    },
+                    "lastOpponent.nickname": {
+                      "type": "object",
+                      "description": "venue.providerId"
+                    },
+                    "lastOpponent.teamType": {
+                      "type": "object",
+                      "description": "venue.name"
+                    },
+                    "lastOpponent.club.id": {
+                      "type": "object",
+                      "description": "venue.abbreviation"
+                    },
+                    "lastOpponent.club.providerId": {
+                      "type": "object",
+                      "description": "venue.location"
+                    },
+                    "lastOpponent.club.name": {
+                      "type": "object",
+                      "description": "venue.state"
+                    },
+                    "lastOpponent.club.abbreviation": {
+                      "type": "object",
+                      "description": "venue.timezone"
+                    },
+                    "lastOpponent.club.nickname": {
+                      "type": "object",
+                      "description": "metadata.ticket_link"
+                    },
+                    "nextOpponent.id": {
+                      "type": "object",
+                      "description": "compSeason.year"
+                    },
+                    "nextOpponent.providerId": {
+                      "type": "object",
+                      "description": "away.team.club.name"
+                    },
+                    "nextOpponent.name": {
+                      "type": "object",
+                      "description": "away.team.club.abbreviation"
+                    },
+                    "nextOpponent.abbreviation": {
+                      "type": "object",
+                      "description": "away.team.club.nickname"
+                    },
+                    "nextOpponent.nickname": {
+                      "type": "object",
+                      "description": "away.score.goals"
+                    },
+                    "nextOpponent.teamType": {
+                      "type": "object",
+                      "description": "away.score.behinds"
+                    },
+                    "nextOpponent.club.id": {
+                      "type": "object",
+                      "description": "away.score.totalScore"
+                    },
+                    "nextOpponent.club.providerId": {
+                      "type": "object",
+                      "description": "away.score.superGoals"
+                    },
+                    "nextOpponent.club.name": {
+                      "type": "object",
+                      "description": "venue.id"
+                    },
+                    "nextOpponent.club.abbreviation": {
+                      "type": "object",
+                      "description": "venue.providerId"
+                    },
+                    "nextOpponent.club.nickname": {
+                      "type": "object",
+                      "description": "venue.name"
+                    },
+                    "nightRecord.wins": {
+                      "type": "object",
+                      "description": "venue.abbreviation"
+                    },
+                    "nightRecord.losses": {
+                      "type": "object",
+                      "description": "venue.location"
+                    },
+                    "nightRecord.draws": {
+                      "type": "object",
+                      "description": "venue.state"
+                    },
+                    "nightRecord.played": {
+                      "type": "object",
+                      "description": "venue.timezone"
+                    },
+                    "interstateRecord.wins": {
+                      "type": "object",
+                      "description": "metadata.ticket_link"
+                    },
+                    "interstateRecord.losses": {
+                      "type": "object",
+                      "description": "compSeason.year"
+                    },
+                    "interstateRecord.draws": {
+                      "type": "object",
+                      "description": "away.team.club.abbreviation"
+                    },
+                    "interstateRecord.played": {
+                      "type": "object",
+                      "description": "away.team.club.nickname"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/lineup": {
+      "get": {
+        "tags": [
+          "Lineup"
+        ],
+        "description": "Returns results",
+        "parameters": [
+          {
+            "name": "season",
+            "in": "query",
+            "type": "integer",
+            "description": "The season number in year format YYYY",
+            "default": 2022,
+            "required": false
+          },
+          {
+            "name": "round_number",
+            "in": "query",
+            "type": "integer",
+            "description": "The round number",
+            "default": 1,
+            "required": false
+          },
+          {
+            "name": "source",
+            "in": "query",
+            "type": "string",
+            "description": "The data source. Note, only 'AFL' source has AFLW fixture data.",
+            "default": "AFL",
+            "required": false
+          },
+          {
+            "name": "competition",
+            "in": "query",
+            "type": "string",
+            "description": "The AFL competition.",
+            "default": "AFLM",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "providerId": {
+                      "type": "object",
+                      "description": "id"
+                    },
+                    "utcStartTime": {
+                      "type": "object",
+                      "description": "providerId"
+                    },
+                    "status": {
+                      "type": "object",
+                      "description": "away.team.id"
+                    },
+                    "compSeason.shortName": {
+                      "type": "object",
+                      "description": "away.team.providerId"
+                    },
+                    "round.name": {
+                      "type": "object",
+                      "description": "away.team.name"
+                    },
+                    "round.roundNumber": {
+                      "type": "object",
+                      "description": "away.team.abbreviation"
+                    },
+                    "venue.name": {
+                      "type": "object",
+                      "description": "away.team.nickname"
+                    },
+                    "teamAbbr": {
+                      "type": "object",
+                      "description": "away.team.teamType"
+                    },
+                    "teamName": {
+                      "type": "object",
+                      "description": "away.team.club.id"
+                    },
+                    "teamNickname": {
+                      "type": "object",
+                      "description": "away.team.club.providerId"
+                    },
+                    "teamId": {
+                      "type": "object",
+                      "description": "away.team.club.name"
+                    },
+                    "position": {
+                      "type": "object",
+                      "description": "away.team.club.abbreviation"
+                    },
+                    "player.playerId": {
+                      "type": "object",
+                      "description": "away.team.club.nickname"
+                    },
+                    "player.captain": {
+                      "type": "object",
+                      "description": "away.score.goals"
+                    },
+                    "player.playerJumperNumber": {
+                      "type": "object",
+                      "description": "away.score.behinds"
+                    },
+                    "player.playerName.givenName": {
+                      "type": "object",
+                      "description": "away.score.totalScore"
+                    },
+                    "player.playerName.surname": {
+                      "type": "object",
+                      "description": "away.score.superGoals"
+                    },
+                    "teamStatus": {
+                      "type": "object",
+                      "description": "venue.id"
+                    },
+                    "teamType": {
+                      "type": "object",
+                      "description": "venue.providerId"
+                    },
+                    "lateChanges": {
+                      "type": "object",
+                      "description": "venue.name"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/results": {
+      "get": {
+        "tags": [
+          "Results"
+        ],
+        "description": "Returns results",
+        "parameters": [
+          {
+            "name": "season",
+            "in": "query",
+            "type": "integer",
+            "description": "The season number in year format YYYY",
+            "default": 2022,
+            "required": false
+          },
+          {
+            "name": "round_number",
+            "in": "query",
+            "type": "integer",
+            "description": "The round number",
+            "default": 1,
+            "required": false
+          },
+          {
+            "name": "source",
+            "in": "query",
+            "type": "string",
+            "description": "The data source. Note, only 'AFL' source has AFLW fixture data.",
+            "default": "AFL",
+            "required": false
+          },
+          {
+            "name": "competition",
+            "in": "query",
+            "type": "string",
+            "description": "The AFL competition.",
+            "default": "AFLM",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "match.date": {
+                      "type": "object",
+                      "description": "id"
+                    },
+                    "match.status": {
+                      "type": "object",
+                      "description": "providerId"
+                    },
+                    "match.matchId": {
+                      "type": "object",
+                      "description": "away.team.providerId"
+                    },
+                    "match.venue": {
+                      "type": "object",
+                      "description": "away.team.name"
+                    },
+                    "match.utcStartTime": {
+                      "type": "object",
+                      "description": "away.team.abbreviation"
+                    },
+                    "match.homeTeamId": {
+                      "type": "object",
+                      "description": "away.team.nickname"
+                    },
+                    "match.awayTeamId": {
+                      "type": "object",
+                      "description": "away.team.teamType"
+                    },
+                    "match.round": {
+                      "type": "object",
+                      "description": "away.team.club.id"
+                    },
+                    "match.venueLocalStartTime": {
+                      "type": "object",
+                      "description": "away.team.club.providerId"
+                    },
+                    "match.abbr": {
+                      "type": "object",
+                      "description": "away.team.club.name"
+                    },
+                    "match.twitterHashTag": {
+                      "type": "object",
+                      "description": "away.team.club.abbreviation"
+                    },
+                    "match.homeTeam.name": {
+                      "type": "object",
+                      "description": "away.team.club.nickname"
+                    },
+                    "match.homeTeam.timeZone": {
+                      "type": "object",
+                      "description": "away.score.goals"
+                    },
+                    "match.homeTeam.teamId": {
+                      "type": "object",
+                      "description": "away.score.behinds"
+                    },
+                    "match.homeTeam.abbr": {
+                      "type": "object",
+                      "description": "away.score.totalScore"
+                    },
+                    "match.homeTeam.nickname": {
+                      "type": "object",
+                      "description": "away.score.superGoals"
+                    },
+                    "match.awayTeam.name": {
+                      "type": "object",
+                      "description": "venue.id"
+                    },
+                    "match.awayTeam.timeZone": {
+                      "type": "object",
+                      "description": "venue.providerId"
+                    },
+                    "match.awayTeam.teamId": {
+                      "type": "object",
+                      "description": "venue.name"
+                    },
+                    "match.awayTeam.abbr": {
+                      "type": "object",
+                      "description": "venue.providerId"
+                    },
+                    "match.awayTeam.nickname": {
+                      "type": "object",
+                      "description": "venue.name"
+                    },
+                    "venue.address": {
+                      "type": "object",
+                      "description": "venue.providerId"
+                    },
+                    "venue.name": {
+                      "type": "object",
+                      "description": "venue.name"
+                    },
+                    "venue.state": {
+                      "type": "object",
+                      "description": "venue.providerId"
+                    },
+                    "venue.timeZone": {
+                      "type": "object",
+                      "description": "venue.name"
+                    },
+                    "venue.venueId": {
+                      "type": "object",
+                      "description": "venue.providerId"
+                    },
+                    "venue.abbreviation": {
+                      "type": "object",
+                      "description": "venue.name"
+                    },
+                    "venue.capacity": {
+                      "type": "object",
+                      "description": "venue.providerId"
+                    },
+                    "venue.groundDimension": {
+                      "type": "object",
+                      "description": "venue.name"
+                    },
+                    "venue.latitude": {
+                      "type": "object",
+                      "description": "venue.providerId"
+                    },
+                    "venue.longitude": {
+                      "type": "object",
+                      "description": "venue.name"
+                    },
+                    "venue.landOwner": {
+                      "type": "object",
+                      "description": "venue.providerId"
+                    },
+                    "round.name": {
+                      "type": "object",
+                      "description": "venue.name"
+                    },
+                    "round.year": {
+                      "type": "object",
+                      "description": "venue.providerId"
+                    },
+                    "round.roundId": {
+                      "type": "object",
+                      "description": "venue.name"
+                    },
+                    "round.abbreviation": {
+                      "type": "object",
+                      "description": "venue.providerId"
+                    },
+                    "round.competitionId": {
+                      "type": "object",
+                      "description": "venue.name"
+                    },
+                    "round.roundNumber": {
+                      "type": "object",
+                      "description": "venue.providerId"
+                    },
+                    "status": {
+                      "type": "object",
+                      "description": "venue.name"
+                    },
+                    "matchId": {
+                      "type": "object",
+                      "description": "venue.providerId"
+                    },
+                    "scoreWorm": {
+                      "type": "object",
+                      "description": "venue.name"
+                    },
+                    "scoreMap": {
+                      "type": "object",
+                      "description": "venue.providerId"
+                    },
+                    "lastUpdated": {
+                      "type": "object",
+                      "description": "venue.name"
+                    },
+                    "homeTeamScore.periodScore": {
+                      "type": "object",
+                      "description": "venue.providerId"
+                    },
+                    "homeTeamScore.rushedBehinds": {
+                      "type": "object",
+                      "description": "venue.name"
+                    },
+                    "homeTeamScore.minutesInFront": {
+                      "type": "object",
+                      "description": "venue.providerId"
+                    },
+                    "homeTeamScore.matchScore.totalScore": {
+                      "type": "object",
+                      "description": "venue.name"
+                    },
+                    "homeTeamScore.matchScore.goals": {
+                      "type": "object",
+                      "description": "venue.providerId"
+                    },
+                    "homeTeamScore.matchScore.behinds": {
+                      "type": "object",
+                      "description": "venue.name"
+                    },
+                    "homeTeamScore.matchScore.superGoals": {
+                      "type": "object",
+                      "description": "venue.providerId"
+                    },
+                    "awayTeamScore.periodScore": {
+                      "type": "object",
+                      "description": "venue.name"
+                    },
+                    "awayTeamScore.rushedBehinds": {
+                      "type": "object",
+                      "description": "venue.providerId"
+                    },
+                    "awayTeamScore.minutesInFront": {
+                      "type": "object",
+                      "description": "venue.name"
+                    },
+                    "awayTeamScore.matchScore.totalScore": {
+                      "type": "object",
+                      "description": "venue.providerId"
+                    },
+                    "awayTeamScore.matchScore.goals": {
+                      "type": "object",
+                      "description": "venue.name"
+                    },
+                    "awayTeamScore.matchScore.behinds": {
+                      "type": "object",
+                      "description": "venue.providerId"
+                    },
+                    "awayTeamScore.matchScore.superGoals": {
+                      "type": "object",
+                      "description": "venue.name"
+                    },
+                    "matchClock.periods": {
+                      "type": "object",
+                      "description": "venue.providerId"
+                    },
+                    "weather.description": {
+                      "type": "object",
+                      "description": "venue.name"
+                    },
+                    "weather.tempInCelsius": {
+                      "type": "object",
+                      "description": "venue.providerId"
+                    },
+                    "weather.weatherType": {
+                      "type": "object",
+                      "description": "venue.name"
+                    },
+                    "homeTeamScoreChart.goals": {
+                      "type": "object",
+                      "description": "venue.providerId"
+                    },
+                    "homeTeamScoreChart.leftBehinds": {
+                      "type": "object",
+                      "description": "venue.name"
+                    },
+                    "homeTeamScoreChart.rightBehinds": {
+                      "type": "object",
+                      "description": "venue.providerId"
+                    },
+                    "homeTeamScoreChart.leftPosters": {
+                      "type": "object",
+                      "description": "venue.name"
+                    },
+                    "homeTeamScoreChart.rightPosters": {
+                      "type": "object",
+                      "description": "venue.providerId"
+                    },
+                    "homeTeamScoreChart.rushedBehinds": {
+                      "type": "object",
+                      "description": "venue.name"
+                    },
+                    "homeTeamScoreChart.touchedBehinds": {
+                      "type": "object",
+                      "description": "venue.providerId"
+                    },
+                    "awayTeamScoreChart.goals": {
+                      "type": "object",
+                      "description": "venue.name"
+                    },
+                    "awayTeamScoreChart.leftBehinds": {
+                      "type": "object",
+                      "description": "venue.providerId"
+                    },
+                    "awayTeamScoreChart.rightBehinds": {
+                      "type": "object",
+                      "description": "venue.name"
+                    },
+                    "awayTeamScoreChart.leftPosters": {
+                      "type": "object",
+                      "description": "venue.providerId"
+                    },
+                    "awayTeamScoreChart.rightPosters": {
+                      "type": "object",
+                      "description": "venue.name"
+                    },
+                    "awayTeamScoreChart.rushedBehinds": {
+                      "type": "object",
+                      "description": "venue.providerId"
+                    },
+                    "awayTeamScoreChart.touchedBehinds": {
+                      "type": "object",
+                      "description": "venue.name"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/player_details": {
+      "get": {
+        "tags": [
+          "Player Details"
+        ],
+        "description": "Returns results",
+        "parameters": [
+          {
+            "name": "season",
+            "in": "query",
+            "type": "integer",
+            "description": "The season number in year format YYYY",
+            "default": 2022,
+            "required": false
+          },
+          {
+            "name": "round_number",
+            "in": "query",
+            "type": "integer",
+            "description": "The round number",
+            "default": 1,
+            "required": false
+          },
+          {
+            "name": "source",
+            "in": "query",
+            "type": "string",
+            "description": "The data source. Note, only 'AFL' source has AFLW fixture data.",
+            "default": "AFL",
+            "required": false
+          },
+          {
+            "name": "competition",
+            "in": "query",
+            "type": "string",
+            "description": "The AFL competition.",
+            "default": "AFLM",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "match.date": {
+                      "type": "object",
+                      "description": "id"
+                    },
+                    "firstName": {
+                      "type": "object",
+                      "description": "providerId"
+                    },
+                    "surname": {
+                      "type": "object",
+                      "description": "away.team.providerId"
+                    },
+                    "id": {
+                      "type": "object",
+                      "description": "away.team.name"
+                    },
+                    "team": {
+                      "type": "object",
+                      "description": "away.team.abbreviation"
+                    },
+                    "season": {
+                      "type": "object",
+                      "description": "providerId"
+                    },
+                    "jumperNumber": {
+                      "type": "object",
+                      "description": "away.team.providerId"
+                    },
+                    "position": {
+                      "type": "object",
+                      "description": "away.team.name"
+                    },
+                    "providerId": {
+                      "type": "object",
+                      "description": "away.team.abbreviation"
+                    },
+                    "dateOfBirth": {
+                      "type": "object",
+                      "description": "providerId"
+                    },
+                    "draftYear": {
+                      "type": "object",
+                      "description": "away.team.providerId"
+                    },
+                    "heightInCm": {
+                      "type": "object",
+                      "description": "away.team.name"
+                    },
+                    "weightInKg": {
+                      "type": "object",
+                      "description": "away.team.abbreviation"
+                    },
+                    "recruitedFrom": {
+                      "type": "object",
+                      "description": "providerId"
+                    },
+                    "debutYear": {
+                      "type": "object",
+                      "description": "away.team.providerId"
+                    },
+                    "draftType": {
+                      "type": "object",
+                      "description": "away.team.name"
+                    },
+                    "draftPosition": {
+                      "type": "object",
+                      "description": "away.team.abbreviation"
+                    },
+                    "data_accessed": {
+                      "type": "object",
+                      "description": "providerId"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/player_statistics": {
+      "get": {
+        "tags": [
+          "Player Statistics"
+        ],
+        "description": "Returns results",
+        "parameters": [
+          {
+            "name": "season",
+            "in": "query",
+            "type": "integer",
+            "description": "The season number in year format YYYY",
+            "default": 2022,
+            "required": false
+          },
+          {
+            "name": "round_number",
+            "in": "query",
+            "type": "integer",
+            "description": "The round number",
+            "default": 1,
+            "required": false
+          },
+          {
+            "name": "source",
+            "in": "query",
+            "type": "string",
+            "description": "The data source. Note, only 'AFL' source has AFLW fixture data.",
+            "default": "AFL",
+            "required": false
+          },
+          {
+            "name": "competition",
+            "in": "query",
+            "type": "string",
+            "description": "The AFL competition.",
+            "default": "AFLM",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+
+                    "providerId": {
+                      "type": "object",
+                      "description": "id"
+                    },
+                    "utcStartTime": {
+                      "type": "object",
+                      "description": "providerId"
+                    },
+                    "status": {
+                      "type": "object",
+                      "description": "away.team.providerId"
+                    },
+                    "compSeason.shortName": {
+                      "type": "object",
+                      "description": "away.team.name"
+                    },
+                    "round.name": {
+                      "type": "object",
+                      "description": "away.team.abbreviation"
+                    },
+                    "round.roundNumber": {
+                      "type": "object",
+                      "description": "providerId"
+                    },
+                    "venue.name": {
+                      "type": "object",
+                      "description": "away.team.providerId"
+                    },
+                    "home.team.club.name": {
+                      "type": "object",
+                      "description": "away.team.name"
+                    },
+                    "away.team.club.name": {
+                      "type": "object",
+                      "description": "away.team.abbreviation"
+                    },
+                    "player.jumperNumber": {
+                      "type": "object",
+                      "description": "providerId"
+                    },
+                    "player.photoURL": {
+                      "type": "object",
+                      "description": "away.team.providerId"
+                    },
+                    "player.player.position": {
+                      "type": "object",
+                      "description": "away.team.name"
+                    },
+                    "player.player.player.playerId": {
+                      "type": "object",
+                      "description": "away.team.abbreviation"
+                    },
+                    "player.player.player.captain": {
+                      "type": "object",
+                      "description": "providerId"
+                    },
+                    "player.player.player.playerJumperNumber": {
+                      "type": "object",
+                      "description": "away.team.providerId"
+                    },
+                    "player.player.player.givenName": {
+                      "type": "object",
+                      "description": "away.team.name"
+                    },
+                    "player.player.player.surname": {
+                      "type": "object",
+                      "description": "away.team.abbreviation"
+                    },
+                    "teamId": {
+                      "type": "object",
+                      "description": "providerId"
+                    },
+                    "gamesPlayed": {
+                      "type": "object",
+                      "description": "id"
+                    },
+                    "timeOnGroundPercentage": {
+                      "type": "object",
+                      "description": "providerId"
+                    },
+                    "goals": {
+                      "type": "object",
+                      "description": "away.team.providerId"
+                    },
+                    "behinds": {
+                      "type": "object",
+                      "description": "away.team.name"
+                    },
+                    "superGoals": {
+                      "type": "object",
+                      "description": "away.team.abbreviation"
+                    },
+                    "kicks": {
+                      "type": "object",
+                      "description": "providerId"
+                    },
+                    "handballs": {
+                      "type": "object",
+                      "description": "away.team.providerId"
+                    },
+                    "disposals": {
+                      "type": "object",
+                      "description": "away.team.name"
+                    },
+                    "marks": {
+                      "type": "object",
+                      "description": "away.team.abbreviation"
+                    },
+                    "bounces": {
+                      "type": "object",
+                      "description": "providerId"
+                    },
+                    "tackles": {
+                      "type": "object",
+                      "description": "away.team.providerId"
+                    },
+                    "contestedPossessions": {
+                      "type": "object",
+                      "description": "away.team.name"
+                    },
+                    "uncontestedPossessions": {
+                      "type": "object",
+                      "description": "away.team.abbreviation"
+                    },
+                    "totalPossessions": {
+                      "type": "object",
+                      "description": "providerId"
+                    },
+                    "inside50s": {
+                      "type": "object",
+                      "description": "away.team.providerId"
+                    },
+                    "contestedMarks": {
+                      "type": "object",
+                      "description": "away.team.name"
+                    },
+                    "hitouts": {
+                      "type": "object",
+                      "description": "away.team.abbreviation"
+                    },
+                    "onePercenters": {
+                      "type": "object",
+                      "description": "providerId"
+                    },
+                    "disposalEfficiency": {
+                      "type": "object",
+                      "description": "away.team.abbreviation"
+                    },
+                    "clangers": {
+                      "type": "object",
+                      "description": "providerId"
+                    },
+                    "freesFor": {
+                      "type": "object",
+                      "description": "id"
+                    },
+                    "freesAgainst": {
+                      "type": "object",
+                      "description": "providerId"
+                    },
+                    "dreamTeamPoints": {
+                      "type": "object",
+                      "description": "away.team.providerId"
+                    },
+                    "rebound50s": {
+                      "type": "object",
+                      "description": "away.team.name"
+                    },
+                    "goalAssists": {
+                      "type": "object",
+                      "description": "away.team.abbreviation"
+                    },
+                    "goalAccuracy": {
+                      "type": "object",
+                      "description": "providerId"
+                    },
+                    "ratingPoints": {
+                      "type": "object",
+                      "description": "away.team.providerId"
+                    },
+                    "ranking": {
+                      "type": "object",
+                      "description": "away.team.name"
+                    },
+                    "lastUpdated": {
+                      "type": "object",
+                      "description": "away.team.abbreviation"
+                    },
+                    "turnovers": {
+                      "type": "object",
+                      "description": "providerId"
+                    },
+                    "intercepts": {
+                      "type": "object",
+                      "description": "away.team.providerId"
+                    },
+                    "tacklesInside50": {
+                      "type": "object",
+                      "description": "away.team.name"
+                    },
+                    "shotsAtGoal": {
+                      "type": "object",
+                      "description": "away.team.abbreviation"
+                    },
+                    "goalEfficiency": {
+                      "type": "object",
+                      "description": "providerId"
+                    },
+                    "shotEfficiency": {
+                      "type": "object",
+                      "description": "away.team.providerId"
+                    },
+                    "interchangeCounts": {
+                      "type": "object",
+                      "description": "away.team.name"
+                    },
+                    "scoreInvolvements": {
+                      "type": "object",
+                      "description": "away.team.abbreviation"
+                    },
+                    "metresGained": {
+                      "type": "object",
+                      "description": "providerId"
+                    },
+                    "clearances.centreClearances": {
+                      "type": "object",
+                      "description": "away.team.providerId"
+                    },
+                    "clearances.stoppageClearances": {
+                      "type": "object",
+                      "description": "away.team.name"
+                    },
+                    "clearances.totalClearances": {
+                      "type": "object",
+                      "description": "away.team.abbreviation"
+                    },
+                    "extendedStats.effectiveKicks": {
+                      "type": "object",
+                      "description": "providerId"
+                    },
+                    "extendedStats.kickEfficiency": {
+                      "type": "object",
+                      "description": "away.team.providerId"
+                    },
+                    "extendedStats.kickToHandballRatio": {
+                      "type": "object",
+                      "description": "away.team.name"
+                    },
+                    "extendedStats.effectiveDisposals": {
+                      "type": "object",
+                      "description": "away.team.abbreviation"
+                    },
+                    "extendedStats.marksOnLead": {
+                      "type": "object",
+                      "description": "providerId"
+                    },
+                    "extendedStats.interceptMarks": {
+                      "type": "object",
+                      "description": "away.team.providerId"
+                    },
+                    "extendedStats.contestedPossessionRate": {
+                      "type": "object",
+                      "description": "away.team.name"
+                    },
+                    "extendedStats.hitoutsToAdvantage": {
+                      "type": "object",
+                      "description": "away.team.abbreviation"
+                    },
+                    "extendedStats.hitoutWinPercentage": {
+                      "type": "object",
+                      "description": "providerId"
+                    },
+                    "extendedStats.hitoutToAdvantageRate": {
+                      "type": "object",
+                      "description": "away.team.providerId"
+                    },
+                    "extendedStats.groundBallGets": {
+                      "type": "object",
+                      "description": "away.team.name"
+                    },
+                    "extendedStats.f50GroundBallGets": {
+                      "type": "object",
+                      "description": "away.team.abbreviation"
+                    },
+                    "extendedStats.scoreLaunches": {
+                      "type": "object",
+                      "description": "providerId"
+                    },
+                    "extendedStats.pressureActs": {
+                      "type": "object",
+                      "description": "id"
+                    },
+                    "extendedStats.defHalfPressureActs": {
+                      "type": "object",
+                      "description": "providerId"
+                    },
+                    "extendedStats.spoils": {
+                      "type": "object",
+                      "description": "away.team.providerId"
+                    },
+                    "extendedStats.ruckContests": {
+                      "type": "object",
+                      "description": "away.team.name"
+                    },
+                    "extendedStats.contestDefOneOnOnes": {
+                      "type": "object",
+                      "description": "away.team.abbreviation"
+                    },
+                    "extendedStats.contestDefLosses": {
+                      "type": "object",
+                      "description": "providerId"
+                    },
+                    "extendedStats.contestDefLossPercentage": {
+                      "type": "object",
+                      "description": "away.team.providerId"
+                    },
+                    "extendedStats.contestOffOneOnOnes": {
+                      "type": "object",
+                      "description": "away.team.name"
+                    },
+                    "extendedStats.contestOffWins": {
+                      "type": "object",
+                      "description": "away.team.abbreviation"
+                    },
+                    "extendedStats.contestOffWinsPercentage": {
+                      "type": "object",
+                      "description": "providerId"
+                    },
+                    "extendedStats.centreBounceAttendances": {
+                      "type": "object",
+                      "description": "away.team.providerId"
+                    },
+                    "extendedStats.kickins": {
+                      "type": "object",
+                      "description": "away.team.name"
+                    },
+                    "extendedStats.kickinsPlayon": {
+                      "type": "object",
+                      "description": "away.team.abbreviation"
+                    },
+                    "player.playerId": {
+                      "type": "object",
+                      "description": "providerId"
+                    },
+                    "player.captain": {
+                      "type": "object",
+                      "description": "away.team.providerId"
+                    },
+                    "player.playerJumperNumber": {
+                      "type": "object",
+                      "description": "away.team.name"
+                    },
+                    "player.givenName": {
+                      "type": "object",
+                      "description": "away.team.abbreviation"
+                    },
+                    "player.surname": {
+                      "type": "object",
+                      "description": "providerId"
+                    },
+                    "teamStatus": {
+                      "type": "object",
+                      "description": "away.team.abbreviation"
+                    },
+                    "team.name": {
+                      "type": "object",
+                      "description": "providerId"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
