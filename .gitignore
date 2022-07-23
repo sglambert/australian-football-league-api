@@ -5,3 +5,4 @@ __pycache__/**
 .buildpacks/**
 tests/**
 runtime.txt
+.coverage
