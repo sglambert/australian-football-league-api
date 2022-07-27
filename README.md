@@ -55,10 +55,6 @@ If you have an idea that would improve the project please feel free to [raise an
     Push to github (git push origin feature/featureName)
     Open a pull request
 
-### License
-
-Distributed under the MIT License. Please see [MIT](https://choosealicense.com/licenses/mit/) for more details.
-
 ### Testing Locally
 
 ```docker build -t afl-api .```
@@ -71,13 +67,22 @@ Localhost home page: ```http://127.0.0.1:5000```
 
 Localhost API docs: ```http://127.0.0.1:5000/api/docs```
 
+### License
+
+Distributed under the MIT License. Please see [MIT](https://choosealicense.com/licenses/mit/) for more details.
+
 ### Contact
 Sammy Lambert - sam.gervase.lambert@gmail.com
 
 ### Acknowledgments
 [AFL](https://www.afl.com.au/)
+
 [afltables](https://afltables.com/afl/afl_index.html)
+
 [fitzRoy](https://github.com/jimmyday12/fitzRoy)
+
 [footywire](https://www.footywire.com/)
+
 [fryzigg](https://twitter.com/fryzigg?lang=en)
+
 [Squiggle](https://api.squiggle.com.au/)
