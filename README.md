@@ -55,7 +55,31 @@ If you have an idea that would improve the project please feel free to [raise an
     Push to github (git push origin feature/featureName)
     Open a pull request
 
-### Testing Locally
+### Testing & Building Locally
+
+#### Tests
+
+To run tests in the ```tests/``` directory we'll need to setup a virtual environment in the project root directory.
+
+To do this, open up a terminal in the proejct root and execute the following command:
+
+``` python3 -m venv venv ```
+
+Then activate the virtual environment:
+
+``` source venv/bin/activate ```
+
+Finally, install dependencies in the virtual environment:
+
+``` pip install -r requirements.txt ```
+
+The virtual environment has been activated and all dependencies installed in it. Tests can now be run by executing the following command in the project root directory:
+
+``` python -m pytest tests -vv -s ```
+
+#### Build
+
+To build the image locally execute the following commands in the project root directory:
 
 ```docker build -t afl-api .```
 
