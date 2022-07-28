@@ -11,38 +11,46 @@
         "tags": [
           "Fixture"
         ],
-        "description": "Returns results",
+        "description": "Returns fixture data",
         "parameters": [
           {
             "name": "season",
             "in": "query",
-            "type": "integer",
+            "schema": {
+              "type": "integer",
+              "default": 2022
+            },
             "description": "The season number in year format YYYY",
-            "default": 2022,
             "required": false
           },
           {
             "name": "round_number",
             "in": "query",
-            "type": "integer",
-            "description": "The round number",
-            "default": 1,
+            "schema": {
+              "type": "integer",
+              "default": 1
+            },
+            "description": "The round number of the season",
             "required": false
           },
           {
             "name": "source",
             "in": "query",
-            "type": "string",
-            "description": "The data source. Note, only 'AFL' source has AFLW fixture data.",
-            "default": "AFL",
+            "schema": {
+              "type": "string",
+              "enum": ["AFL", "footywire", "squiggle"]
+            },
+            "description": "Data source provider - Note, only AFL source has AFLW fixture data",
             "required": false
           },
           {
             "name": "competition",
             "in": "query",
-            "type": "string",
-            "description": "The AFL competition.",
-            "default": "AFLM",
+            "schema": {
+              "type": "string",
+              "enum": ["AFLM", "AFLW"]
+            },
+            "description": "AFL competition",
             "required": false
           }
         ],
@@ -279,38 +287,46 @@
         "tags": [
           "Ladder"
         ],
-        "description": "Returns Ladder",
+        "description": "Returns Ladder data",
         "parameters": [
           {
             "name": "season",
             "in": "query",
-            "type": "integer",
+            "schema": {
+              "type": "integer",
+              "default": 2022
+            },
             "description": "The season number in year format YYYY",
-            "default": 2022,
             "required": false
           },
           {
             "name": "round_number",
             "in": "query",
-            "type": "integer",
-            "description": "The round number",
-            "default": 1,
+            "schema": {
+              "type": "integer",
+              "default": 1
+            },
+            "description": "The round number of the season",
             "required": false
           },
           {
             "name": "source",
             "in": "query",
-            "type": "string",
-            "description": "The data source. Note, only 'AFL' source has AFLW fixture data.",
-            "default": "AFL",
+            "schema": {
+              "type": "string",
+              "enum": ["AFL", "afltables", "squiggle"]
+            },
+            "description": "Data source provider - Note, only AFL source has AFLW ladder data",
             "required": false
           },
           {
             "name": "competition",
             "in": "query",
-            "type": "string",
-            "description": "The AFL competition.",
-            "default": "AFLM",
+            "schema": {
+              "type": "string",
+              "enum": ["AFLM", "AFLW"]
+            },
+            "description": "AFL competition",
             "required": false
           }
         ],
@@ -723,38 +739,46 @@
         "tags": [
           "Lineup"
         ],
-        "description": "Returns results",
+        "description": "Returns lineup data",
         "parameters": [
           {
             "name": "season",
             "in": "query",
-            "type": "integer",
+            "schema": {
+              "type": "integer",
+              "default": 2022
+            },
             "description": "The season number in year format YYYY",
-            "default": 2022,
             "required": false
           },
           {
             "name": "round_number",
             "in": "query",
-            "type": "integer",
-            "description": "The round number",
-            "default": 1,
+            "schema": {
+              "type": "integer",
+              "default": 1
+            },
+            "description": "The round number of the season",
             "required": false
           },
           {
             "name": "source",
             "in": "query",
-            "type": "string",
-            "description": "The data source. Note, only 'AFL' source has AFLW fixture data.",
-            "default": "AFL",
+            "schema": {
+              "type": "string",
+              "enum": ["AFL", "afltables", "footywire", "fryzigg", "squiggle"]
+            },
+            "description": "Data source provider",
             "required": false
           },
           {
             "name": "competition",
             "in": "query",
-            "type": "string",
-            "description": "The AFL competition.",
-            "default": "AFLM",
+            "schema": {
+              "type": "string",
+              "enum": ["AFLM", "AFLW"]
+            },
+            "description": "AFL competition",
             "required": false
           }
         ],
@@ -859,38 +883,46 @@
         "tags": [
           "Results"
         ],
-        "description": "Returns results",
+        "description": "Returns results data",
         "parameters": [
           {
             "name": "season",
             "in": "query",
-            "type": "integer",
+            "schema": {
+              "type": "integer",
+              "default": 2022
+            },
             "description": "The season number in year format YYYY",
-            "default": 2022,
             "required": false
           },
           {
             "name": "round_number",
             "in": "query",
-            "type": "integer",
-            "description": "The round number",
-            "default": 1,
+            "schema": {
+              "type": "integer",
+              "default": 1
+            },
+            "description": "The round number of the season",
             "required": false
           },
           {
             "name": "source",
             "in": "query",
-            "type": "string",
-            "description": "The data source. Note, only 'AFL' source has AFLW fixture data.",
-            "default": "AFL",
+            "schema": {
+              "type": "string",
+              "enum": ["AFL", "afltables", "footywire", "fryzigg"]
+            },
+            "description": "Data source provider",
             "required": false
           },
           {
             "name": "competition",
             "in": "query",
-            "type": "string",
-            "description": "The AFL competition.",
-            "default": "AFLM",
+            "schema": {
+              "type": "string",
+              "enum": ["AFLM", "AFLW"]
+            },
+            "description": "AFL competition",
             "required": false
           }
         ],
@@ -1215,38 +1247,36 @@
         "tags": [
           "Player Details"
         ],
-        "description": "Returns results",
+        "description": "Returns player details data",
         "parameters": [
           {
-            "name": "season",
+            "name": "team",
             "in": "query",
-            "type": "integer",
-            "description": "The season number in year format YYYY",
-            "default": 2022,
+            "schema": {
+              "type": "string",
+              "default": "Geelong"
+            },
+            "description": "The name of the team",
             "required": false
           },
           {
-            "name": "round_number",
+            "name": "current",
             "in": "query",
-            "type": "integer",
-            "description": "The round number",
-            "default": 1,
+            "schema": {
+              "type": "string",
+              "enum": ["True", "False"]
+            },
+            "description": "The team's current or historical player details",
             "required": false
           },
           {
             "name": "source",
             "in": "query",
-            "type": "string",
-            "description": "The data source. Note, only 'AFL' source has AFLW fixture data.",
-            "default": "AFL",
-            "required": false
-          },
-          {
-            "name": "competition",
-            "in": "query",
-            "type": "string",
-            "description": "The AFL competition.",
-            "default": "AFLM",
+            "schema": {
+              "type": "string",
+              "enum": ["AFL", "afltables", "footywire"]
+            },
+            "description": "Data source provider - Note, only footywire has historical player details",
             "required": false
           }
         ],
@@ -1343,38 +1373,46 @@
         "tags": [
           "Player Statistics"
         ],
-        "description": "Returns results",
+        "description": "Returns player statistics data",
         "parameters": [
           {
             "name": "season",
             "in": "query",
-            "type": "integer",
+            "schema": {
+              "type": "integer",
+              "default": 2022
+            },
             "description": "The season number in year format YYYY",
-            "default": 2022,
             "required": false
           },
           {
             "name": "round_number",
             "in": "query",
-            "type": "integer",
-            "description": "The round number",
-            "default": 1,
+            "schema": {
+              "type": "integer",
+              "default": 1
+            },
+            "description": "The round number of the season",
             "required": false
           },
           {
             "name": "source",
             "in": "query",
-            "type": "string",
-            "description": "The data source. Note, only 'AFL' source has AFLW fixture data.",
-            "default": "AFL",
+            "schema": {
+              "type": "string",
+              "enum": ["AFL", "afltables", "footywire", "fryzigg"]
+            },
+            "description": "Data source provider",
             "required": false
           },
           {
             "name": "competition",
             "in": "query",
-            "type": "string",
-            "description": "The AFL competition.",
-            "default": "AFLM",
+            "schema": {
+              "type": "string",
+              "default": "AFLM"
+            },
+            "description": "AFL competition",
             "required": false
           }
         ],
