@@ -1,3 +1,8 @@
+## *5/1/2023 Update
+Heroku free tier accounts are no longer available. Therefore, a lot of the links to this API aren't working.
+
+Unfortunately, I don't have a lot of time to maintain this project on my own at the moment so it may stay like this for some time.
+
 # Australian-Football-League-API
 The Australian-Football-League-API (AFL-API) provides a free and simple way to retrieve AFL data from various sources.
 
